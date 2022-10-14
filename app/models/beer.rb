@@ -3,11 +3,7 @@ class Beer < ApplicationRecord
   has_many :ratings
 
   def average_rating
-    avg = 0
-    self.ratings.each {|rating|
-        avg = avg + rating.score
-    }
-    (avg / self.ratings.count).to_f
+    self.ratings.average(:score)
   end
 
 end
