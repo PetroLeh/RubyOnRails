@@ -1,6 +1,6 @@
-# fly.toml file generated for autumn-glitter-2781 on 2022-10-03T16:15:28+03:00
+# fly.toml file generated for frosty-cherry-6848 on 2022-10-17T11:11:54+03:00
 
-app = "autumn-glitter-2781"
+app = "frosty-cherry-6848"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
