@@ -8,6 +8,13 @@
   </i>
     
   <p>beers count: <%= brewery.beers.count %></p>
+  
+  <% if brewery.ratings.empty? %>
+    <p>there is no ratings for this brewery</p>
+  <% else %>
+    <p>this brewery has <%= pluralize(brewery.ratings.count, 'rating') %> with average of <%= brewery.average_rating %></p>
+  <% end %>
+
     <p>
     <% brewery.beers.each do |beer| %>
 
