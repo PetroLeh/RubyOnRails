@@ -11,6 +11,12 @@
   <li><%= rating %> <%= link_to 'delete', rating, data: {'turbo-method': :delete} %></li>
   <% end%>
 </ul>
+<h3>beer club memberships</h3>
+<ul>
+  <% @user.beer_clubs.each do |club| %>
+  <li><%= link_to club.to_s, club %>
+  <% end %>
+</ul>
 </div>
 <% end %>
 
