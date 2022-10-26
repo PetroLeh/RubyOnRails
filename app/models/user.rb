@@ -1,11 +1,26 @@
 class User < ApplicationRecord
   include RatingAverage
 
+  has_secure_password
+
   validates :username, uniqueness: true,
                        length: { in: 3..30 }
+  validate :password_validation
+
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
 
+  def password_validation
+    if password.length < 4
+      errors.add(:password, "has to be at least 4 characters long")
+    end
+    if !password.match(/[A-Z]/) 
+      errors.add(:password, "has to contain at least one capital letter (A-Z)")
+    end
+    if !password.match(/\d/) 
+        errors.add(:password, "has to contain at least one number (0-9)")
+    end
+  end
 end
