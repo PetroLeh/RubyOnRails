@@ -1,5 +1,5 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: %i[ show edit update destroy ]
+  before_action :set_membership, only: %i[show edit update destroy]
 
   # GET /memberships or /memberships.json
   def index
@@ -18,9 +18,9 @@ class MembershipsController < ApplicationController
     @beer_clubs = []
 
     all_beer_clubs.each do |bc|
-        if !(bc.members.include? current_user)
-            @beer_clubs.append(bc)
-        end
+      if !(bc.members.include? current_user)
+        @beer_clubs.append(bc)
+      end
     end
   end
 
@@ -32,7 +32,7 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.create params.require(:membership).permit(:beer_club_id)
     @membership.user = current_user
-    
+
     if @membership.save
       redirect_to user_path current_user
     else
@@ -72,13 +72,14 @@ class MembershipsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_membership
-      @membership = Membership.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def membership_params
-      params.require(:membership).permit(:user_id, :beer_club_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_membership
+    @membership = Membership.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def membership_params
+    params.require(:membership).permit(:user_id, :beer_club_id)
+  end
 end

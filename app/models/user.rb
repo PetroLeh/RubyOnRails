@@ -16,11 +16,11 @@ class User < ApplicationRecord
     if password.length < 4
       errors.add(:password, "has to be at least 4 characters long")
     end
-    if !password.match(/[A-Z]/) 
+    if !password.match(/[A-Z]/)
       errors.add(:password, "has to contain at least one capital letter (A-Z)")
     end
-    if !password.match(/\d/) 
-        errors.add(:password, "has to contain at least one number (0-9)")
+    if !password.match(/\d/)
+      errors.add(:password, "has to contain at least one number (0-9)")
     end
   end
 end
