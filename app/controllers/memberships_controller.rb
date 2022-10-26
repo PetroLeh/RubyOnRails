@@ -13,7 +13,15 @@ class MembershipsController < ApplicationController
   # GET /memberships/new
   def new
     @membership = Membership.new
-    @beer_clubs = BeerClub.all
+
+    all_beer_clubs = BeerClub.all
+    @beer_clubs = []
+
+    all_beer_clubs.each do |bc|
+        if !(bc.members.include? current_user)
+            @beer_clubs.append(bc)
+        end
+    end
   end
 
   # GET /memberships/1/edit
@@ -28,7 +36,14 @@ class MembershipsController < ApplicationController
     if @membership.save
       redirect_to user_path current_user
     else
-      @beer_clubs = BeerClubs.all
+      all_beer_clubs = BeerClub.all
+      @beer_clubs = []
+
+      all_beer_clubs.each do |bc|
+        if !(bc.members.include? current_user)
+          @beer_clubs.append(bc)
+        end
+      end
       render :new, status: :unprocessable_entity
     end
   end
