@@ -18,15 +18,18 @@
 <h3>beer club memberships</h3>
 <ul>
   <% @user.beer_clubs.each do |club| %>
-  <li><%= link_to club.to_s, club %>
+  <li><%= link_to club.name, club %>
   <% end %>
 </ul>
 </div>
 <% end %>
 
 <div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <% if @user == current_user %>
+    <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <% end %>
   <%= link_to "Back to users", users_path %>
-
-  <%= button_to "Destroy this user", @user, method: :delete %>
+  <% if @user == current_user %>
+    <%= button_to "Destroy this user", @user, method: :delete %>
+  <% end %>
 </div>
