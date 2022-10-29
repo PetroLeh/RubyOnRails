@@ -13,13 +13,11 @@ class User < ApplicationRecord
   has_many :beer_clubs, through: :memberships
 
   def password_validation
-    if password.length < 4
+    if password.nil? || password.length < 4
       errors.add(:password, "has to be at least 4 characters long")
-    end
-    if !password.match(/[A-Z]/)
+    elsif !password.match(/[A-Z]/)
       errors.add(:password, "has to contain at least one capital letter (A-Z)")
-    end
-    if !password.match(/\d/)
+    elsif !password.match(/\d/)
       errors.add(:password, "has to contain at least one number (0-9)")
     end
   end
