@@ -3,9 +3,7 @@ require 'rails_helper'
 include Helpers
 
 describe "User" do
-    before :each do
-        FactoryBot.create :user
-    end
+    let!(:user) { FactoryBot.create :user }
 
     it "when signed up with good credentials, is added to the system" do
         visit signup_path
@@ -32,5 +30,21 @@ describe "User" do
             expect(current_path).to eq(signin_path)
             expect(page).to have_content "Username and/or password mismatch"
         end
+    end
+
+    describe "who is signed in" do
+
+      it "can see only own ratings in users page" do
+        user2 = FactoryBot.create(:user, username: "Hannu Hanhi", password: "Onnekas2", password_confirmation: "Onnekas2")
+        
+        create_beer_with_rating({ user: user2 }, 20)
+
+        create_beers_with_many_ratings({ user: user }, 20, 30)
+        expect(Rating.count).to eq(3)
+
+        sign_in({ username: "Aku Ankka", password: "3Veljenpoikaa" })
+        expect(page).to have_content("Has made 2 ratings, average rating 25.0")
+      end
+
     end
 end
