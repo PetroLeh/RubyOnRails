@@ -21,4 +21,15 @@ class User < ApplicationRecord
       errors.add(:password, "has to contain at least one number (0-9)")
     end
   end
+
+  def favorite_beer
+    return nil if ratings.empty?    
+    ratings.sort_by{ |r| r.score }.last.beer
+  end
+
+  def favorite_style
+    return nil if ratings.empty?
+    return ratings.first.beer.style
+  end
+
 end
