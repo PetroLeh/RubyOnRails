@@ -23,13 +23,14 @@ class User < ApplicationRecord
   end
 
   def favorite_beer
-    return nil if ratings.empty?    
-    ratings.sort_by{ |r| r.score }.last.beer
+    return nil if ratings.empty?
+
+    ratings.max_by(&:score).beer
   end
 
   def favorite_style
     return nil if ratings.empty?
-    return ratings.first.beer.style
-  end
 
+    ratings.first.beer.style
+  end
 end
