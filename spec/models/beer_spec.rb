@@ -11,14 +11,14 @@ RSpec.describe Beer, type: :model do
     end
 
     describe "is not saved if" do
-        it "a name is not given" do
+        it "name is not given or" do
           beer = Beer.create style: "test_style", brewery: test_brewery
 
           expect(beer).not_to be_valid
           expect(Beer.count).to eq(0)
         end
 
-        it "a style is not given" do
+        it "style is not given" do
           beer = Beer.create name: "test_beer", brewery: test_brewery
 
           expect(beer).not_to be_valid

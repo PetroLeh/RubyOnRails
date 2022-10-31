@@ -35,9 +35,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "with a proper password" do
-    let(:user) { User.create username: "Aku Ankka", password: "3Veljenpoikaa", password_confirmation: "3Veljenpoikaa" }
-    let(:test_brewery) { Brewery.new name: "test", year: 2022 }
-    let(:test_beer) {Beer.create name: "Testbeer", style: "testStyle", brewery: test_brewery }
+    let(:user) { FactoryBot.create(:user) }
 
     it "is saved" do
       expect(user).to be_valid
@@ -45,11 +43,8 @@ RSpec.describe User, type: :model do
     end
 
     it "and with two ratings, has the correct average rating" do
-      rating = Rating.new score: 10, beer: test_beer
-      rating2 = Rating.new score: 20, beer: test_beer
-
-      user.ratings << rating
-      user.ratings << rating2
+      FactoryBot.create(:rating, score: 10, user: user)
+      FactoryBot.create(:rating, score: 20, user: user)
 
       expect(user.ratings.count).to eq(2)
       expect(user.average_rating).to eq(15.0)
