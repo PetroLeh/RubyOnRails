@@ -32,5 +32,19 @@ describe "Rating" do
 
     visit ratings_path
     expect(page).to have_content("Ratings: 2")
+    expect(page).to have_content("#{beer1.name} 10 #{user.username}")
+    expect(page).to have_content("#{beer2.name} 20 #{user.username}")
+  end
+
+  it "is removed from database when deleted" do
+    FactoryBot.create(:rating, score: 10, beer: beer1, user: user)
+    expect(Rating.count).to eq(1)
+    visit user_path(user)
+    expect(page).to have_content("Has made 1 rating")
+
+    click_link("delete")
+    visit user_path(user)
+    expect(page).to have_content("Has made 0 ratings")    
+    expect(Rating.count).to eq(0)
   end
 end
