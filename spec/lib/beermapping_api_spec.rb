@@ -45,7 +45,5 @@ describe "BeermappingApi" do
         expect(last.name).to eq("Sonnisaari")
         expect(last.street).to eq("Tuotekuja 1") 
     end
-
-
 end 
 

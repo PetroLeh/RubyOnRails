@@ -15,7 +15,11 @@ city <%= form.text_field :city %>
         <% @places.each do |place| %>
             <tr>
                 <% Place.rendered_fields.each do |field| %>
+                    <% if field.to_s == "name" %>
+                    <td><%= link_to place.name, place_path(place.id) %></td>
+                    <% else %>
                     <td><%= place.send(field) %></td>
+                    <% end %>
                 <% end %>
             </tr>
         <% end %>
