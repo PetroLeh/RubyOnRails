@@ -1,25 +1,26 @@
 <div id="<%= dom_id brewery %>">
   <h2>
-    <%= brewery.name %>    
+    <%= link_to brewery.name, brewery %>
   </h2>
 
-  <i>
-    Established in <%= brewery.year %>
-  </i>
-    
-  <p>beers count: <%= brewery.beers.count %></p>
-  
+  <p>
+    Established at <%= brewery.year %>
+  </p>
+
+  <p>
+    Beers count: <%= brewery.beers.count%>
+  </p>
+
+  <p>
+    <% brewery.beers.each do |beer| %>
+      <%= link_to beer.name, beer %>
+    <% end %>
+  </p>
+
   <% if brewery.ratings.empty? %>
-    <p>there is no ratings for this brewery</p>
+    brewery has not yet been rated!
   <% else %>
-    <p>this brewery has <%= pluralize(brewery.ratings.count, 'rating') %> with average of <%= brewery.average_rating %></p>
+    Brewery has <%= pluralize(brewery.ratings.count, 'rating') %> with an average of <%= brewery.average_rating %>
   <% end %>
 
-    <p>
-    <% brewery.beers.each do |beer| %>
-
-        <%= link_to beer.name, beer %>
-
-    <% end %>
-    </p>
 </div>

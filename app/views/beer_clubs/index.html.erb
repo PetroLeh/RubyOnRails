@@ -4,11 +4,10 @@
 
 <div id="beer_clubs">
   <% @beer_clubs.each do |beer_club| %>
-    <%= link_to beer_club.name, beer_club %>
-    <p><strong>founded:</strong> <%= beer_club.founded %></p>
-    <p><strong>city:</strong> <%= beer_club.city %>
-    <p><strong>members:</strong> <%= beer_club.members.count %></p>
+    <p>
+      <%= link_to beer_club.name, beer_club %>
+    </p>
   <% end %>
 </div>
 
-<%= link_to("New beer club", new_beer_club_path) if current_user %>
+<%= link_to "New beer club", new_beer_club_path %>

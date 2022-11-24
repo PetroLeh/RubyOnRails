@@ -1,8 +1,13 @@
-<% if @place %>
-    <h3><%= @place.name %></h3>
-    <p><%= @place.status %></p>
-    <p><%= @place.street %></p>
-    <p><%= @place.zip %> <%= @place.city %></p>
-<% else %>
-    oijoi, not found
-<% end %>
+<h1> <%= @place.name %></h1>
+
+<div>
+  <%= @place.status %>
+</div>
+
+<div>
+  <%= @place.street %>
+</div>
+
+<div>
+  <%= @place.zip %> <%= @place.city %>
+</div>
