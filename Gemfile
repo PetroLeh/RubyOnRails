@@ -33,6 +33,12 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 gem "bootsnap", require: false
 
+gem "bootstrap", "~> 5.2.0"
+
+gem "jquery-rails"
+
+gem "mini_racer"
+
 group :development, :test do
   gem 'pry-byebug'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
